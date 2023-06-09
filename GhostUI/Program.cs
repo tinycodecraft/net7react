@@ -7,10 +7,18 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using System.IO;
 
 var spaSrcPath = "ClientApp";
 var corsPolicyName = "AllowAll";
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    ApplicationName = typeof(Program).Assembly.FullName,
+    ContentRootPath = Directory.GetCurrentDirectory(),
+    //EnvironmentName =  Environments.Development,
+    //WebRootPath = "wwwroot"
+});
 
 // Custom healthcheck example
 builder.Services.AddHealthChecks()
