@@ -16,6 +16,7 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
     Args = args,
     ApplicationName = typeof(Program).Assembly.FullName,
     ContentRootPath = Directory.GetCurrentDirectory(),
+    
     //EnvironmentName =  Environments.Development,
     //WebRootPath = "wwwroot"
 });
@@ -55,6 +56,8 @@ var app = builder.Build();
 // If production, enable Brotli/Gzip response compression & strict transport security headers
 if (app.Environment.IsDevelopment())
 {
+ 
+    
     app.UseDeveloperExceptionPage();
 }
 else
