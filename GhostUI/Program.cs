@@ -52,6 +52,7 @@ builder.Services.AddOpenApiDocument(settings =>
 
 var app = builder.Build();
 
+
 // If development, enable Hot Module Replacement
 // If production, enable Brotli/Gzip response compression & strict transport security headers
 if (app.Environment.IsDevelopment())
@@ -65,6 +66,8 @@ else
     app.UseResponseCompression();
     app.UseExceptionHandler("/Error");
     app.UseHsts();
+    app.UseStaticFiles();
+    app.UseSpaStaticFiles();
 }
 
 app.UseCustomExceptionHandler();
