@@ -1,4 +1,5 @@
 import axios, { type AxiosInstance } from 'axios';
+import { BASEURL } from '../config';
 
 /**
  * Service API base class - configures default settings/error handling for inheriting class
@@ -9,7 +10,7 @@ export abstract class BaseService {
   protected constructor(controller: string, timeout: number = 50000) {
     this.$http = axios.create({
       timeout,
-      baseURL: `http://localhost:52530/api/${controller}/`
+      baseURL: `${BASEURL}/api/${controller}/`
     });
   }
 }

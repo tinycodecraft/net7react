@@ -36,10 +36,13 @@ export const DROPDOWN_TEST_DATA: SelectOption[] = [
 /**
  * HealthChecks/Swagger response path config
  */
+
+export const BASEURL= process.env.NODE_ENV === 'production' ? 'http://localhost:8080': 'http://localhost:52530';
+
 export const NUGET_URL_CONFIG = {
-  HealthUi: 'http://localhost:52530/healthchecks-ui',
-  HealthJson: 'http://localhost:52530/healthchecks-json',
-  SwaggerDocs: 'http://localhost:52530/swagger'
+  HealthUi: `${BASEURL}/healthchecks-ui`,
+  HealthJson: `${BASEURL}/healthchecks-json`,
+  SwaggerDocs: `${BASEURL}/swagger`
 };
 
 /**
