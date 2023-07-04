@@ -1,5 +1,6 @@
 import { SampleApi } from 'src/api';
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from './configureStore';
 
 export type WeatherForecast = Readonly<{
   id: number;
@@ -48,7 +49,10 @@ export const getForecastsAsync = createAsyncThunk(
   'weather/getForecastsAsync',
   async (startDateIndex: number, { dispatch, getState }) => {
     // If param startDateIndex === state.startDateIndex, do not perform action
-    const { startDateIndex: stateIdx } = (getState as () => WeatherState)();
+    
+    const { weather: { startDateIndex: stateIdx} } = (getState as () => RootState)();
+    console.log('getForecast called with getstate',(getState() as WeatherState).startDateIndex, 'with startDateIndex', stateIdx)
+    
     if (startDateIndex === stateIdx) {
       return;
     }
