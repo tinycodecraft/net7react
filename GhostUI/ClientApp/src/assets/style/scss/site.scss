@@ -8,3 +8,9 @@
 /* local styles */
 @import 'base/generic', 'base/transition';
 @import 'components/navbar', 'components/tool-tip';
+
+/* tailwind css imports */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
