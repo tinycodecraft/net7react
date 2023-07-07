@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
 import type { Params } from 'react-router-dom';
-import { Login, Dashboard, FetchData, Form } from '../containers';
+import { Login, Dashboard, FetchData, Form,Quillboard } from '../containers';
 import type { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export const TRANSITION_DEFAULT = {
@@ -46,6 +46,13 @@ export const Routes: Route[] = [
     Component: Dashboard,
     transition: TRANSITION_DEFAULT
   },
+  {
+    showInNav: true,
+    path: '/quill',
+    name: 'Quill',
+    Component: Quillboard,
+    transition: TRANSITION_DEFAULT
+  },  
   {
     showInNav: true,
     name: 'Fetch',
