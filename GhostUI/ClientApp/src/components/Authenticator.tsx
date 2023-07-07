@@ -1,6 +1,7 @@
 import { useEffect, memo } from 'react';
 import { AuthStatusEnum } from '../store/authSlice';
-import styled, { keyframes } from 'styled-components';
+import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
 
 type AuthenticatorProps = Readonly<{
   delay?: number;

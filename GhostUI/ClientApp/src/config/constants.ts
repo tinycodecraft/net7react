@@ -1,11 +1,13 @@
 import type { AnchorHTMLAttributes } from 'react';
-import type { Theme } from 'react-functional-select';
 import type { SelectOption } from '../store/formSlice';
+
 
 /**
  * react-functional-select 'themeConfig' property
  */
-export const THEME_CONFIG: Theme = {
+
+
+export const THEME_CONFIG = {
   color: {
     primary: '#09d3ac'
   },

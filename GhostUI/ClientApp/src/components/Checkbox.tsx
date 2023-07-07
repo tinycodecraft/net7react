@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { forwardRef, type Ref } from 'react';
 
 type CheckboxProps = Readonly<{
