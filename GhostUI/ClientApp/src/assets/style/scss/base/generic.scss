@@ -138,6 +138,14 @@ code {
   }
 }
 
+.quill-wrapper {
+
+  .ql-editor {
+    height: 100%;
+    min-height: 440px;
+  }
+}
+
 .dashboard-wrapper {
   min-height: 60rem;
   padding-bottom: 3rem;
