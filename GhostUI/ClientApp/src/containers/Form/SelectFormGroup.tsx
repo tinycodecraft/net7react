@@ -1,16 +1,21 @@
-import  Select,{type SingleValue}  from 'react-select';
-import { useCallback, type FunctionComponent } from 'react';
-import { useAppSelector, useAppDispatch } from '../../store';
-import { DROPDOWN_TEST_DATA } from '../../config';
-import { selectOption, type SelectOption } from '../../store/formSlice';
+import Select, { type SingleValue } from "react-select";
+import { useCallback, type FunctionComponent } from "react";
+import { useAppSelector, useAppDispatch } from "../../store";
+import { DROPDOWN_TEST_DATA } from "../../config";
+import { selectOption, type SelectOption } from "../../store/formSlice";
 
 const SelectFormGroup: FunctionComponent = () => {
   const dispatch = useAppDispatch();
-  const selectedOption = useAppSelector<SingleValue<SelectOption>>((state) => state.form.selectedOption);
+  const selectedOption = useAppSelector<SingleValue<SelectOption>>(
+    (state) => state.form.selectedOption
+  );
 
-  const onOptionChange = useCallback((option: SingleValue<SelectOption>) => {
-    dispatch(selectOption(option));
-  }, [dispatch]);
+  const onOptionChange = useCallback(
+    (option: SingleValue<SelectOption>) => {
+      dispatch(selectOption(option));
+    },
+    [dispatch]
+  );
 
   return (
     <div className="column">
@@ -19,34 +24,33 @@ const SelectFormGroup: FunctionComponent = () => {
       <div className="field form-control-group">
         <Select
           styles={{
-
-            dropdownIndicator: (base,state) => ({
+            dropdownIndicator: (base, state) => ({
               ...base,
               transition: "all .2s ease",
-              transform: state.selectProps.menuIsOpen ? ["rotate(180deg)"]: []
-
-              
-            }),            
-            control: (baseStyles, state)=>({
-              ...baseStyles,
-              borderColor: state.isFocused ? "rgba(9,211,172,0.75)": "rgb(206, 212, 218)",
-              boxShadow: state.isFocused ? "rgb(9, 211, 172, 0.225) 0px 0px 0px 0.2rem": "inherit",
-              
+              transform: state.selectProps.menuIsOpen ? ["rotate(180deg)"] : [],
             }),
-            option: (baseStyles,state)=> ({
+            control: (baseStyles, state) => ({
               ...baseStyles,
-              backgroundColor: state.isSelected ? '#09d3ac' : "inherit",
+              borderColor: state.isFocused
+                ? "rgba(9,211,172,0.75)"
+                : "rgb(206, 212, 218)",
+              boxShadow: state.isFocused
+                ? "rgb(9, 211, 172, 0.225) 0px 0px 0px 0.2rem"
+                : "inherit",
+            }),
+            option: (baseStyles, state) => ({
+              ...baseStyles,
+              backgroundColor: state.isSelected ? "#09d3ac" : "inherit",
 
               ":hover": {
-                backgroundColor: state.isSelected ? '#09d3ac': "rgba(9,211,172,0.224)"
-
-              }
-            })
-          
-
-          }}                
+                backgroundColor: state.isSelected
+                  ? "#09d3ac"
+                  : "rgba(9,211,172,0.224)",
+              },
+            }),
+          }}
           options={DROPDOWN_TEST_DATA}
-          defaultValue={selectedOption}          
+          defaultValue={selectedOption}
           onChange={onOptionChange}
         />
       </div>

@@ -1,33 +1,48 @@
-import { useCallback, useState, useRef, type FormEvent, type FunctionComponent } from 'react';
-import { Routes } from '../../config';
-import { useTextInput } from '../../hooks';
-import LoginControls from './LoginControls';
-import UserNameInput from './UserNameInput';
-import PasswordInput from './PasswordInput';
-import { useNavigate } from 'react-router-dom';
-import { toast, type Id } from 'react-toastify';
-import { Authenticator } from '../../components';
-import { useAppDispatch, useAppSelector } from '../../store';
-import BasedGhostLogoPNG from '../../assets/image/based-ghost-main.png';
-import { loginAsync, setAuthStatus, resetState, AuthStatusEnum, type Credentials } from '../../store/authSlice';
+import {
+  useCallback,
+  useState,
+  useRef,
+  type FormEvent,
+  type FunctionComponent,
+} from "react";
+import { Routes } from "../../config";
+import { useTextInput } from "../../hooks";
+import LoginControls from "./LoginControls";
+import UserNameInput from "./UserNameInput";
+import PasswordInput from "./PasswordInput";
+import { useNavigate } from "react-router-dom";
+import { toast, type Id } from "react-toastify";
+import { Authenticator } from "../../components";
+import { useAppDispatch, useAppSelector } from "../../store";
+import BasedGhostLogoPNG from "../../assets/image/based-ghost-main.png";
+import {
+  loginAsync,
+  setAuthStatus,
+  resetState,
+  AuthStatusEnum,
+  type Credentials,
+} from "../../store/authSlice";
 
 const Login: FunctionComponent = () => {
-  const toastIdRef = useRef<Id>('');
+  const toastIdRef = useRef<Id>("");
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isInputInvalid, setIsInputInvalid] = useState<boolean>(false);
 
-  const userNameInput = useTextInput('');
-  const passwordInput = useTextInput('', showPassword ? 'text' : 'password');
+  const userNameInput = useTextInput("");
+  const passwordInput = useTextInput("", showPassword ? "text" : "password");
 
   // react-redux hooks state/actions
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const status = useAppSelector<AuthStatusEnum>((state) => state.auth.status);
 
-  const dispatchAuthStatus = useCallback((status: AuthStatusEnum): void => {
-    dispatch(setAuthStatus(status));
-  }, [dispatch]);
+  const dispatchAuthStatus = useCallback(
+    (status: AuthStatusEnum): void => {
+      dispatch(setAuthStatus(status));
+    },
+    [dispatch]
+  );
 
   const onFailedAuth = useCallback((): void => {
     dispatchAuthStatus(AuthStatusEnum.NONE);
@@ -35,12 +50,18 @@ const Login: FunctionComponent = () => {
   }, [dispatch, dispatchAuthStatus]);
 
   const onSuccessfulAuth = useCallback((): void => {
-    const homePath = Routes.find((x) => x.name === 'Home')?.path ?? '/';
+    const homePath = Routes.find((x) => x.name === "Home")?.path ?? "/";
     navigate(homePath);
   }, [navigate]);
 
-  const onRememberMeCheck = useCallback((checked: boolean): void => setRememberMe(checked), []);
-  const onToggleShowPassword = useCallback((): void => setShowPassword((prevShow: boolean) => !prevShow), []);
+  const onRememberMeCheck = useCallback(
+    (checked: boolean): void => setRememberMe(checked),
+    []
+  );
+  const onToggleShowPassword = useCallback(
+    (): void => setShowPassword((prevShow: boolean) => !prevShow),
+    []
+  );
 
   const handleLogin = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -52,7 +73,7 @@ const Login: FunctionComponent = () => {
       // Run invalidInputs error and display toast notification (if one is not already active)
       setIsInputInvalid(true);
       if (!toast.isActive(toastIdRef.current)) {
-        toastIdRef.current = toast.error('Enter user name/password');
+        toastIdRef.current = toast.error("Enter user name/password");
       }
     } else {
       // Clear any toast notifications and prepare state for Login request stub / run login request stub
