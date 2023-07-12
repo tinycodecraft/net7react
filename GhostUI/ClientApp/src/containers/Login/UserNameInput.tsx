@@ -9,7 +9,7 @@ type UserNameInputProps = Readonly<{
 }>;
 
 const UserNameInput = memo<UserNameInputProps>(
-  ({ textInput, isInputInvalid }) => {
+  ({ textInput, isInputInvalid }: UserNameInputProps) => {
     const { hasValue, bindToInput } = textInput;
 
     const className = classNames([

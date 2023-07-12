@@ -7,7 +7,7 @@ import type { AuthUser, Credentials } from '../store/authSlice';
  */
 class AuthService extends BaseService {
   private static _authService: AuthService;
-  private static _controller: string = 'Auth';
+  private static _controller = 'Auth';
 
   private constructor(name: string) {
     super(name);

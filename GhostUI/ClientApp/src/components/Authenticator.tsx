@@ -2,12 +2,14 @@ import { useEffect, memo } from 'react';
 import { AuthStatusEnum } from '../store/authSlice';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
+import PropTypes from 'prop-types'
+
 
 type AuthenticatorProps = Readonly<{
   delay?: number;
   authStatus: AuthStatusEnum;
-  handleOnFail: (...args: any[]) => any;
-  handleOnSuccess: (...args: any[]) => any;
+  handleOnFail: (...args: typeof PropTypes.any[]) => void|typeof PropTypes.any;
+  handleOnSuccess: (...args: typeof PropTypes.any[]) => void|typeof PropTypes.any;
 }>;
 
 const CHILD_DIV_COUNT = 9;
@@ -71,7 +73,7 @@ const Authenticator = memo<AuthenticatorProps>(({
   handleOnFail,
   handleOnSuccess,
   delay = 1500
-}) => {
+}: AuthenticatorProps) => {
   useEffect(() => {
     const authHandler = setTimeout(() => {
       switch (authStatus) {

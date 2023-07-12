@@ -6,7 +6,7 @@ import type { WeatherForecast } from '../store/weatherSlice';
  */
 class SampleService extends BaseService {
   private static _sampleService: SampleService;
-  private static _controller: string = 'SampleData';
+  private static _controller= 'SampleData';
 
   private constructor(name: string) {
     super(name);

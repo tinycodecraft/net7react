@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type PaginationProps = Pick<WeatherState, 'startDateIndex'>;
 
-const Pagination = memo<PaginationProps>(({ startDateIndex = 0 }) => (
+const Pagination = memo<PaginationProps>(({ startDateIndex = 0 }: PaginationProps) => (
   <p className="buttons pagination-group">
     <Link
       className="button is-info"

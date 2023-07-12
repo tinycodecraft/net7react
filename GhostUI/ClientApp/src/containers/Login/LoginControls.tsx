@@ -10,7 +10,7 @@ type LoginControlsProps = Readonly<{
 const LoginControls = memo<LoginControlsProps>(({
   rememberMe,
   handleRememberMeCheck
-}) => (
+}: LoginControlsProps) => (
   <Fragment>
     <div className="field remember-me-field">
       <Checkbox

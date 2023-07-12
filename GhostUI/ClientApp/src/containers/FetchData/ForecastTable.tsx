@@ -3,7 +3,7 @@ import type { WeatherState } from '../../store/weatherSlice';
 
 type ForecastTableProps = Pick<WeatherState, 'forecasts'>;
 
-const ForecastTable = memo<ForecastTableProps>(({ forecasts }) => (
+const ForecastTable = memo<ForecastTableProps>(({ forecasts }: ForecastTableProps) => (
   <table className="table is-fullwidth">
     <thead>
       <tr>

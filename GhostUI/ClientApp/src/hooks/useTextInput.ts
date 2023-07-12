@@ -3,7 +3,7 @@ import { useState, useCallback, useMemo, type ChangeEvent } from 'react';
 type InputType = 'text' | 'password';
 
 const useTextInput = (
-  initial: string = '',
+  initial  = '',
   type: InputType = 'text'
 ) => {
   const [value, setValue] = useState<string>(initial);

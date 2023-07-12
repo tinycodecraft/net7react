@@ -15,7 +15,7 @@ const PasswordInput = memo<PasswordInputProps>(({
   showPassword,
   isInputInvalid,
   toggleShowPassword
-}) => {
+}: PasswordInputProps) => {
   const { hasValue, bindToInput } = textInput;
 
   const className = classNames([
