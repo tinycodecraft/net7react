@@ -1,12 +1,12 @@
 import { useRef, useEffect, type RefObject } from 'react';
-import { PropTypes} from 'prop-types'
+import  PropTypes from 'prop-types'
 
 // Events to addEventListener for if 'events' param not specified
 const DEFAULT_EVENTS = ['mousedown', 'touchstart'];
 
 const useOnClickOutside = (
   ref: RefObject<HTMLElement | null>,
-  callback: (...args: typeof PropTypes.any[]) =>  void | typeof PropTypes.any,
+  callback: EventListener,
   events: string[] = DEFAULT_EVENTS
 ): void => {
   const callbackRef = useRef(callback);
