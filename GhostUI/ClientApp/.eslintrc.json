@@ -34,7 +34,9 @@
         "spaced-comment": "error",
         
         "no-duplicate-imports": "error" ,
-        "@typescript-eslint/non-nullable-type-assertion-style": "warn"       
+        "@typescript-eslint/non-nullable-type-assertion-style": "warn" 
+        
+        
     },
     "settings": {
         "import/resolver": {
