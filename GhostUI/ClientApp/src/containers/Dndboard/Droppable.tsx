@@ -18,5 +18,5 @@ export const  Droppable:FC<{children:ReactNode, id: UniqueIdentifier}> =({ child
     </div>
   );
 }
-export default Droppable;
+
 
