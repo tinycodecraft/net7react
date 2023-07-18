@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { StyledSettings,SettingsLink,SettingsMenu, SettingsMenuLink, SettingsMenuTitle,CogIcon } from '../fragments'
+import { StyledSettings,SettingsLink,SettingsMenu, SettingsMenuLink, SettingsMenuTitle,BigIcon } from '../fragments'
 import OpenMenuContext from '../context/OpenMenuContext'
 import { Routes, NUGET_URL_CONFIG, LINK_ATTRIBUTES } from '../config';
 import { AuthApi } from '../api';
@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 export const FloatMenu = () => {
+    
     console.log('float menu rerendering');
     const isLoggedIn = useIsLoggedIn();
 
@@ -41,7 +42,7 @@ export const FloatMenu = () => {
         ref={ref}
         onClick={() => OpenMenu && OpenMenu((prevIsMenuOpen) => !prevIsMenuOpen)}
       >
-        <CogIcon icon="cog" />
+        <BigIcon icon="cog" />
       </SettingsLink>
       {MenuOpened && (
         <SettingsMenu>

@@ -10,10 +10,10 @@ const FADE_IN_KEYFRAMES = keyframes`
   }
 `;
 
-  const CogIcon = styled(FontAwesomeIcon)`
+  const BigIcon = styled(FontAwesomeIcon)`
   color: #fff;
   padding: 10px;
   font-size: 1.75em;
 `;
 
-export { FADE_IN_KEYFRAMES, CogIcon}
+export { FADE_IN_KEYFRAMES, BigIcon}
