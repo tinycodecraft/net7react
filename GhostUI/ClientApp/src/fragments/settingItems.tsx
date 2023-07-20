@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { FADE_IN_KEYFRAMES } from './Resources';
+import { FADE_IN_KEYFRAMES } from './decorators';
 
 
 const SettingsLink = styled.a`

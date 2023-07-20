@@ -1,2 +1,3 @@
-export { SettingsLink, SettingsMenu, SettingsMenuLink, SettingsMenuTitle,StyledSettings   } from './Elements';
-export { FADE_IN_KEYFRAMES, BigIcon} from './Resources'
+export { SettingsLink, SettingsMenu, SettingsMenuLink, SettingsMenuTitle,StyledSettings   } from './settingItems';
+export { FADE_IN_KEYFRAMES, BigIcon} from './decorators'
+export { Box,Col,ColorSquare,Item,Row } from './griditems'
