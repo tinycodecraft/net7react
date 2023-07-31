@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { classNames } from "../../utils";
+import { clsxm } from "../../utils";
 import { useTextInput } from "../../hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -12,7 +12,7 @@ const UserNameInput = memo<UserNameInputProps>(
   ({ textInput, isInputInvalid }: UserNameInputProps) => {
     const { hasValue, bindToInput } = textInput;
 
-    const className = classNames([
+    const className = clsxm([
       "input",
       "is-medium",
       isInputInvalid && !hasValue && "is-danger",
