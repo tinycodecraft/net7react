@@ -1,8 +1,8 @@
 import type { ComponentType } from 'react';
 import type { Params } from 'react-router-dom';
-import { Login, Dashboard, FetchData, Form,Quillboard } from '../containers';
+import { Login, Dashboard, FetchData, Form,Quillboard, DndBoard } from '../containers';
 import type { IconProp } from '@fortawesome/fontawesome-svg-core';
-import Dndboard from 'src/containers/Dndboard';
+
 
 export const TRANSITION_DEFAULT = {
   classNames: 'fade',
@@ -51,7 +51,7 @@ export const Routes: Route[] = [
     showInNav: true,
     path: '/dnd',
     name: 'Drag and Drop',
-    Component: Dndboard,
+    Component: DndBoard,
     transition: TRANSITION_DEFAULT
   },    
   {

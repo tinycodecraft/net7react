@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const ColorSquare = styled.div<{ color: string }>`
+export const ColorSquare = styled.div<{ color: string, isoverlay?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,6 +9,9 @@ export const ColorSquare = styled.div<{ color: string }>`
   height: 50px;
   color: white;
   background-color: ${props => props.color};
+  z-index: ${(props)=> props.isoverlay ? 999: 0};
+  cursor: ${(props)=> props.isoverlay ? 'grabbing': 'pointer'};
+  
 `
 export const Row = styled.div`
   display: flex;
