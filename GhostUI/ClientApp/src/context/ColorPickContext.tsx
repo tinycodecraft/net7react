@@ -1,10 +1,4 @@
-import React, {
-  createContext,  
-  useState,
-  type SetStateAction,
-  type FC,
-  type ReactNode,
-} from 'react'
+import React, { createContext, useState, type SetStateAction, type FC, type ReactNode } from 'react'
 import { type DragEndEvent, type DragOverEvent, type UniqueIdentifier } from '@dnd-kit/core'
 import { type ColorType } from '../fragments/types'
 import { idGen } from '../utils'
@@ -21,18 +15,16 @@ export interface ColorPickContextProps {
   setFavoriteId: React.Dispatch<SetStateAction<UniqueIdentifier>>
   palletteItems: ColorType[]
   setPalletteItems: React.Dispatch<SetStateAction<ColorType[]>>
-  activeItem: ColorType|null;
+  activeItem: ColorType | null
   setActiveItem: React.Dispatch<SetStateAction<ColorType | null>>
-  activeItemOrigin: string| null;
+  activeItemOrigin: string | null
   setActiveItemOrigin: React.Dispatch<SetStateAction<string | null>>
   endDrag: (event: DragEndEvent) => void
-  findItem: (id: UniqueIdentifier) => ColorType
+  findItem: (id: UniqueIdentifier) => ColorType | null
   overDrag: (event: DragOverEvent) => void
 }
 
 const ColorPickContext = createContext<Partial<ColorPickContextProps>>({})
-
-
 
 export const ColorPickProvider: FC<{
   children: ReactNode
@@ -53,11 +45,12 @@ export const ColorPickProvider: FC<{
   // origin only tell that the dragged item is from chosen(current)/favorite
   const [activeItemOrigin, setActiveItemOrigin] = useState<string | null>(null)
 
-
-  const getItem = (id: UniqueIdentifier) => {
+  const findItem = (id: UniqueIdentifier) => {
     if (id === favoriteId) return { id: favoriteId, color: favoriteColor }
     if (id === pickerId) return { id: pickerId, color: pickerColor }
-    return palletteItems.find((x) => x.id === id)!
+    const foundItem = palletteItems.find((x) => x.id === id)
+    if (foundItem) return foundItem;
+    return null;
   }
 
   const onDragEnd = ({ active, over }: DragEndEvent) => {
@@ -72,9 +65,11 @@ export const ColorPickProvider: FC<{
         setPalletteItems(palletteItems.filter((item) => item.id !== active.id))
       }
     } else if (over.id === 'current') {
-      getItem(active.id)?.color && setPickerColor(getItem(active.id)?.color)
+      const activeColor = findItem(active.id)?.color
+      activeColor && setPickerColor(activeColor)
     } else if (over.id === 'favorite') {
-      getItem(active.id)?.color && setFavoriteColor(getItem(active.id)?.color)
+      const activeColor = findItem(active.id)?.color
+      activeColor && setFavoriteColor(activeColor)
     }
     setActiveItem(null)
     setActiveItemOrigin(null)
@@ -121,28 +116,31 @@ export const ColorPickProvider: FC<{
     }
   }
 
-
-
-  return <ColorPickContext.Provider value={{
-    pickerColor,
-    setPickerColor,
-    favoriteColor,
-    setFavoriteColor,
-    pickerId,
-    setPickerId,
-    favoriteId,
-    setFavoriteId,
-    palletteItems,
-    setPalletteItems,
-    activeItem,
-    setActiveItem,
-    activeItemOrigin,
-    setActiveItemOrigin,
-    overDrag: onDragOver,
-    endDrag: onDragEnd,
-    findItem: getItem
-    
-  }}>{children}</ColorPickContext.Provider>
+  return (
+    <ColorPickContext.Provider
+      value={{
+        pickerColor,
+        setPickerColor,
+        favoriteColor,
+        setFavoriteColor,
+        pickerId,
+        setPickerId,
+        favoriteId,
+        setFavoriteId,
+        palletteItems,
+        setPalletteItems,
+        activeItem,
+        setActiveItem,
+        activeItemOrigin,
+        setActiveItemOrigin,
+        overDrag: onDragOver,
+        endDrag: onDragEnd,
+        findItem: findItem,
+      }}
+    >
+      {children}
+    </ColorPickContext.Provider>
+  )
 }
 
 export default ColorPickContext
