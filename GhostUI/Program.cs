@@ -50,6 +50,9 @@ builder.Services.AddOpenApiDocument(settings =>
     settings.Description = "Detailed Description of API";
 });
 
+// how to get appsetting
+//var testvalue = builder.Configuration.GetSection("Logging").GetSection("LogLevel").GetSection("Default").Value;
+
 var app = builder.Build();
 
 
