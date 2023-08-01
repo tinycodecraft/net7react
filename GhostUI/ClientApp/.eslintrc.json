@@ -31,11 +31,9 @@
     "rules": {
         "react/react-in-jsx-scope": "off",
         "camelcase": "error",
-        "spaced-comment": "error",
-        
+        "spaced-comment": "warn",        
         "no-duplicate-imports": "error" ,
         "@typescript-eslint/non-nullable-type-assertion-style": "warn" 
-        
         
     },
     "settings": {

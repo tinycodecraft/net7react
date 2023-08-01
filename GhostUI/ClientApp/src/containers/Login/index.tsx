@@ -101,7 +101,7 @@ const Login: FunctionComponent = () => {
           <p className="subtitle">Please login to proceed</p>
           <div className="box login-box">
             <img
-              className="center-img"
+              className="block ml-[auto] mr-[auto]"
               width="170"
               aria-hidden
               id="login-img"

@@ -1,5 +1,7 @@
+/* eslint-disable spaced-comment */
+//When ["never"]
 /// <reference lib="webworker" />
-/* eslint-disable no-restricted-globals */
+
 
 // This service worker can be customized!
 // See https://developers.google.com/web/tools/workbox/modules
