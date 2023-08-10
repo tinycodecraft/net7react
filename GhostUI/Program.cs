@@ -8,6 +8,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using System.IO;
+//using Microsoft.EntityFrameworkCore.Design;
+//using GhostUI.Abstraction;
+//using GhostUI.Middleware;
+//using GhostUI.Services;
+//using Microsoft.AspNetCore.Authentication.JwtBearer;
+//using Microsoft.IdentityModel.Tokens;
+//using System.Text;
+//using System;
+//using System.Threading.Tasks;
+
 
 var spaSrcPath = "ClientApp";
 var corsPolicyName = "AllowAll";
@@ -20,6 +30,8 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
     //EnvironmentName =  Environments.Development,
     //WebRootPath = "wwwroot"
 });
+
+
 
 // Custom healthcheck example
 builder.Services.AddHealthChecks()
@@ -43,15 +55,61 @@ builder.Services.AddMvc(opt => opt.SuppressAsyncSuffixInActionNames = false);
 builder.Services.AddSpaStaticFiles(opt => opt.RootPath = $"{spaSrcPath}/dist");
 
 // Register the Swagger services (using OpenApi 3.0)
+// this inject language preference to support different language.
 builder.Services.AddOpenApiDocument(settings =>
 {
     settings.Version = "v1";
     settings.Title = "GhostUI API";
     settings.Description = "Detailed Description of API";
+    
+    //*If you want language specific work you can try this following code*//
+    //settings.OperationProcessors.Add(new LanguageHeaderProcessor());
 });
 
-// how to get appsetting
-//var testvalue = builder.Configuration.GetSection("Logging").GetSection("LogLevel").GetSection("Default").Value;
+
+//*If you want language specific work you can try this following code*//
+
+//builder.Services.AddHttpContextAccessor();
+
+//builder.Services.AddScoped<ILanguageService, LanguageAccessorService>();
+
+
+//*Jwt setup*//
+var jwtissuer = builder.Configuration["JWTAuth:Issuer"];
+var jwtaudience = builder.Configuration["JWTAuth:Audience"];
+//builder.Services.AddAuthentication(opt =>
+//{
+//    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//}).AddJwtBearer(options =>
+//{
+//    options.SaveToken = true;
+//    options.Events = new JwtBearerEvents
+//    {
+//        OnAuthenticationFailed = jwtctx =>
+//        {
+//            if (jwtctx.Exception.GetType() == typeof(SecurityTokenExpiredException))
+//            {
+//                jwtctx.Response.Headers.Add("IS-TOKEN-EXPIRED", "true");
+//            }
+//            return Task.CompletedTask;
+//        }
+//    };
+//    options.TokenValidationParameters = new TokenValidationParameters()
+//    {
+//        ClockSkew = TimeSpan.Zero,
+        
+//        ValidateIssuer = true,
+//        ValidateAudience = true,
+//        ValidateLifetime = true,
+//        ValidateIssuerSigningKey = true,
+//        ValidIssuer = jwtissuer,
+//        ValidAudience = jwtaudience,
+//        IssuerSigningKey = new SymmetricSecurityKey(
+//            Encoding.UTF8.GetBytes("!AnywhereSecret!")
+//        ),
+//    };
+//});
 
 var app = builder.Build();
 
@@ -90,6 +148,11 @@ app.UseOpenApi();
 app.UseSwaggerUi3();
 app.UseHttpsRedirection();
 app.UseRouting();
+//*Jwt enabled for auth*//
+//app.UseAuthentication();
+//app.UseAuthorization();
+
+
 
 // Map controllers / SignalR hubs
 app.UseEndpoints(endpoints =>
