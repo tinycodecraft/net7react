@@ -11,6 +11,7 @@
     <AssemblyName>GhostUI</AssemblyName>
     <RootNamespace>GhostUI</RootNamespace>
     <EnableNETAnalyzers>False</EnableNETAnalyzers>
+   <!--<GenerateDocumentationFile>true</GenerateDocumentationFile> -->
   </PropertyGroup>
 
   <ItemGroup>

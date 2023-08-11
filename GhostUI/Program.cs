@@ -54,7 +54,7 @@ builder.Services.AddMvc(opt => opt.SuppressAsyncSuffixInActionNames = false);
 // In production, the React files will be served from this directory
 builder.Services.AddSpaStaticFiles(opt => opt.RootPath = $"{spaSrcPath}/dist");
 
-// Register the Swagger services (using OpenApi 3.0)
+// (NSwage library) Register the Swagger services (using OpenApi 3.0)
 // this inject language preference to support different language.
 builder.Services.AddOpenApiDocument(settings =>
 {
@@ -152,7 +152,30 @@ app.UseHealthChecks("/healthchecks-json", new HealthCheckOptions()
 
 // Register the Swagger generator and the Swagger UI middlewares
 // NSwage.MsBuild + adding automation config in GhostUI.csproj makes this part of the build step (updates to API will be handled automatically)
-app.UseOpenApi();
+app.UseOpenApi(settings=>
+{
+    //settings.PostProcess = (doc, request) =>
+    //{
+    //    doc.Info.Version = "v1";
+    //    doc.Info.Title = "GhostUI Api for react";
+    //    doc.Info.Description = "Detail of Api";
+    //    doc.Info.Contact = new NSwag.OpenApiContact
+    //    {
+    //        Name = "TinyCodeCraft",
+    //        Email = "raymond.cw.yau@outlook.com",
+    //        Url = "twitter.com/rcwyau",
+
+    //    };
+    //    doc.Info.License = new NSwag.OpenApiLicense
+    //    {
+    //        Name = "GhostShell",
+    //        Url = "https://ghostshell.com"
+    //    };
+
+
+    //};
+
+});
 app.UseSwaggerUi3();
 app.UseHttpsRedirection();
 app.UseRouting();
