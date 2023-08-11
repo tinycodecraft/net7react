@@ -127,12 +127,20 @@ else
     app.UseResponseCompression();
     app.UseExceptionHandler("/Error");
     app.UseHsts();
-    app.UseStaticFiles();
+    app.UseStaticFiles();//path to static files i.e. wwwroot if not specified
     app.UseSpaStaticFiles();
 }
 
+//* this help Linux deployment *//
+//app.UseForwardedHeaders(new ForwardedHeadersOptions
+//{
+//    ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.All
+//});
+
 app.UseCustomExceptionHandler();
 app.UseCors(corsPolicyName);
+
+
 
 // Show/write HealthReport data from healthchecks (AspNetCore.HealthChecks.UI.Client nuget package)
 app.UseHealthChecksUI();
