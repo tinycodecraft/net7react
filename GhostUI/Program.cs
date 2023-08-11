@@ -8,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using System.IO;
+//using System.Linq;
+//using System.Reflection.Metadata;
+//using NSwag.Generation.Processors.Security;
 //using Microsoft.EntityFrameworkCore.Design;
 //using GhostUI.Abstraction;
 //using GhostUI.Middleware;
@@ -61,6 +64,20 @@ builder.Services.AddOpenApiDocument(settings =>
     settings.Version = "v1";
     settings.Title = "GhostUI API";
     settings.Description = "Detailed Description of API";
+
+    //* JWT security setup for nswag *//
+    //settings.AddSecurity("JWT", Enumerable.Empty<string>(), new NSwag.OpenApiSecurityScheme
+    //{
+    //    Type = NSwag.OpenApiSecuritySchemeType.ApiKey, //this requires "Bearer " prefix in the auth header
+    //    Name="Authorization",
+    //    In= NSwag.OpenApiSecurityApiKeyLocation.Header,
+    //    Description = "Type into the textbox: Bearer {your JWT token}"
+
+
+    //});
+    //settings.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
+
+
     
     //*If you want language specific work you can try this following code*//
     //settings.OperationProcessors.Add(new LanguageHeaderProcessor());
