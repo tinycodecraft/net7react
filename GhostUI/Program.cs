@@ -11,6 +11,7 @@ using System.IO;
 using Serilog;
 using System;
 using GhostUI.Middleware;
+using Serilog.Core;
 //using System.Linq;
 //using System.Reflection.Metadata;
 //using NSwag.Generation.Processors.Security;
@@ -27,6 +28,11 @@ using GhostUI.Middleware;
 
 var spaSrcPath = "ClientApp";
 var corsPolicyName = "AllowAll";
+Log.Logger = new LoggerConfiguration().MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Information)
+    .Enrich.FromLogContext()    
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
+
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
     Args = args,
@@ -37,11 +43,15 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
     //WebRootPath = "wwwroot"
 });
 
-builder.Host.UseSerilog((ctx, cfg) => { 
-    cfg.ReadFrom.Configuration(ctx.Configuration); 
+builder.Host.UseSerilog((ctx,srv, cfg) => { 
+    
+    cfg
+    .ReadFrom.Configuration(ctx.Configuration)
+    .ReadFrom.Services(srv); 
+
     
 });
-
+//only execute once
 builder.Services.AddHostedService<TracerService>();
 
 // Custom healthcheck example
