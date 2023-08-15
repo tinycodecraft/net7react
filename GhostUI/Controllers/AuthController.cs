@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 
 namespace GhostUI.Controllers
 {
@@ -14,15 +15,20 @@ namespace GhostUI.Controllers
     {
         private readonly IHubContext<UsersHub> _hubContext;
 
-        public AuthController(IHubContext<UsersHub> usersHub)
+        private readonly ILogger _logger;
+
+        public AuthController(IHubContext<UsersHub> usersHub,ILogger<AuthController> logger)
         {
             _hubContext = usersHub;
+            _logger = logger;
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(AuthUser), StatusCodes.Status200OK)]
         public async Task<IActionResult> Login([FromBody]Credentials request)
         {
+            _logger.LogInformation("Login api is called.");
+
             await _hubContext.Clients.All.SendAsync("UserLogin");
 
             var token = Guid.NewGuid().ToString();
@@ -35,6 +41,8 @@ namespace GhostUI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Logout()
         {
+            _logger.LogInformation("Logout api is called.");
+
             await _hubContext.Clients.All.SendAsync("UserLogout");
             return Ok();
         }

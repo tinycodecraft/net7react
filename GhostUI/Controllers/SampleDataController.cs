@@ -4,6 +4,7 @@ using GhostUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using Microsoft.Extensions.Logging;
 
 namespace GhostUI.Controllers
 {
@@ -11,6 +12,12 @@ namespace GhostUI.Controllers
     [Route("api/[controller]/[action]")]
     public class SampleDataController : ControllerBase
     {
+        private readonly ILogger _logger;
+        public SampleDataController(ILogger<SampleDataController> logger) { 
+            _logger = logger;
+            _logger.LogInformation("Same Data Controller being invoked.");
+        }
+
         public static readonly ImmutableArray<string> Summaries = ImmutableArray.Create(new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"

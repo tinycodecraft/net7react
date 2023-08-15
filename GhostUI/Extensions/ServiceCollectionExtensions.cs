@@ -11,6 +11,8 @@ namespace GhostUI.Extensions
     {
         public static IServiceCollection AddCorsConfig(this IServiceCollection services, string name)
         {
+            
+            
             services.AddCors(c => c.AddPolicy(name,
                 options => options.AllowAnyOrigin()
                     .AllowAnyHeader()
@@ -24,6 +26,7 @@ namespace GhostUI.Extensions
             IConfiguration config,
             CompressionLevel compressionLvl = CompressionLevel.Fastest)
         {
+            
             var enableForHttps = config.GetValue<bool>("Compression:EnableForHttps");
             var gzipMimeTypes = config.GetSection("Compression:MimeTypes").Get<string[]>();
 

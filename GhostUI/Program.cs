@@ -8,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using System.IO;
+using Serilog;
+using System;
+using GhostUI.Middleware;
 //using System.Linq;
 //using System.Reflection.Metadata;
 //using NSwag.Generation.Processors.Security;
@@ -34,7 +37,12 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
     //WebRootPath = "wwwroot"
 });
 
+builder.Host.UseSerilog((ctx, cfg) => { 
+    cfg.ReadFrom.Configuration(ctx.Configuration); 
+    
+});
 
+builder.Services.AddHostedService<TracerService>();
 
 // Custom healthcheck example
 builder.Services.AddHealthChecks()
@@ -47,6 +55,8 @@ builder.Services.AddHealthChecksUI()
 builder.Services.AddCorsConfig(corsPolicyName);
 builder.Services.AddControllers();
 builder.Services.AddSignalR();
+
+
 
 // Add Brotli/Gzip response compression (prod only)
 builder.Services.AddResponseCompressionConfig(builder.Configuration);
@@ -192,6 +202,14 @@ app.UseOpenApi(settings=>
 
     //};
 
+});
+app.UseSerilogRequestLogging( option=>
+{
+    option.EnrichDiagnosticContext = (diagnostic, http) =>
+    {
+        diagnostic.Set("LocalTime", DateTime.Now.ToString("yyyyMMdd+HHmmss"));
+
+    };
 });
 app.UseSwaggerUi3();
 app.UseHttpsRedirection();
