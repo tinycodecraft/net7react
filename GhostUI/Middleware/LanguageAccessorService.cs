@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System;
 
-namespace GhostUI.Services
+namespace GhostUI.Middleware
 {
 
     public class LanguageAccessorService : ILanguageService
@@ -12,7 +12,7 @@ namespace GhostUI.Services
         {
             _httpContextAccessor = httpContextAccessor;
             var lang = _httpContextAccessor.HttpContext?.Request.Headers["Accept-Language"].ToString();
-            this.LanguageId = String.IsNullOrEmpty(lang) ? "en-US" : lang;
+            LanguageId = string.IsNullOrEmpty(lang) ? "en-US" : lang;
         }
         public string LanguageId { get; }
     }
