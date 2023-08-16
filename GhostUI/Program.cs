@@ -215,6 +215,8 @@ app.UseOpenApi(settings=>
     //};
 
 });
+
+//add enrich parameter for each logging request
 app.UseSerilogRequestLogging( option=>
 {
     option.EnrichDiagnosticContext = (diagnostic, http) =>
