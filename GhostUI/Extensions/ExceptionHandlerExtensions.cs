@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
+using GhostUI.Middleware;
 
 namespace GhostUI.Extensions
 {
     public static class ExceptionHandlerExtensions
     {
+        //Simple handler
         public static IApplicationBuilder UseCustomExceptionHandler(this IApplicationBuilder app)
         {
             app.UseExceptionHandler(builder =>
@@ -31,5 +33,9 @@ namespace GhostUI.Extensions
 
             return app;
         }
+
+        //custom handler with logging
+        public static IApplicationBuilder UseApiExceptionHandling(this IApplicationBuilder app)
+            => app.UseMiddleware<ApiExceptionHandlingMiddleware>();
     }
 }

@@ -176,7 +176,7 @@ else
 //    ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.All
 //});
 
-app.UseCustomExceptionHandler();
+app.UseApiExceptionHandling();
 app.UseCors(corsPolicyName);
 
 
