@@ -126,4 +126,7 @@
   <data name="LastName" xml:space="preserve">
     <value>Last name</value>
   </data>
+  <data name="SummaryOfWeather" xml:space="preserve">
+    <value>Summary about the weather in current location</value>
+  </data>
 </root>

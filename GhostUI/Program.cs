@@ -11,6 +11,8 @@ using System.IO;
 using Serilog;
 using System;
 using GhostUI.Middleware;
+using GhostUI.Services;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 //using Serilog.Core;
 //using System.Linq;
 //using System.Reflection.Metadata;
@@ -45,6 +47,8 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 //hosting environment variable in iwebhostenvironment
 //var isproduction = builder.Environment.IsProduction();
 
+builder.Services.AddTransient<ProblemDetailsFactory, CustomProblemDetailsFactory>();
+
 builder.Host.UseSerilog((ctx,srv, cfg) => { 
     
     cfg
@@ -65,7 +69,9 @@ builder.Services.AddHealthChecksUI()
     .AddInMemoryStorage();
 
 builder.Services.AddCorsConfig(corsPolicyName);
-builder.Services.AddControllers();
+builder.Services.AddControllers(); 
+
+//builder.Services.AddCustomLocalization();
 builder.Services.AddSignalR();
 
 
