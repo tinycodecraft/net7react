@@ -6,11 +6,17 @@ import { BASEURL } from '../config';
  */
 export abstract class BaseService {
   protected readonly $http: AxiosInstance;
+  protected readonly $wAuthHttp: AxiosInstance;
 
   protected constructor(controller: string, timeout  = 50000) {
     this.$http = axios.create({
       timeout,
       baseURL: `${BASEURL}/api/${controller}/`
+    });
+    this.$wAuthHttp = axios.create({
+      timeout,
+      baseURL: `${BASEURL}/api/${controller}/`,
+      withCredentials: true,
     });
   }
 }

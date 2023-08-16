@@ -11,14 +11,13 @@ using System.IO;
 using Serilog;
 using System;
 using GhostUI.Middleware;
-using Serilog.Core;
+//using Serilog.Core;
 //using System.Linq;
 //using System.Reflection.Metadata;
 //using NSwag.Generation.Processors.Security;
 //using Microsoft.EntityFrameworkCore.Design;
 //using GhostUI.Abstraction;
 //using GhostUI.Middleware;
-//using GhostUI.Services;
 //using Microsoft.AspNetCore.Authentication.JwtBearer;
 //using Microsoft.IdentityModel.Tokens;
 //using System.Text;
@@ -42,6 +41,9 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
     //EnvironmentName =  Environments.Development,
     //WebRootPath = "wwwroot"
 });
+
+//hosting environment variable in iwebhostenvironment
+//var isproduction = builder.Environment.IsProduction();
 
 builder.Host.UseSerilog((ctx,srv, cfg) => { 
     
